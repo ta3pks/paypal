@@ -4,4 +4,5 @@ version = "0.1.0"
 authors = ["nikos <nikos@mugsoft.io>"]
 edition = "2018"
 description = "A library to communicate with paypal api"
+license = "BSD"
 [dependencies]

@@ -5,4 +5,5 @@ authors = ["nikos <nikos@mugsoft.io>"]
 edition = "2018"
 description = "A library to communicate with paypal api"
 license = "MIT"
+repository = "https://github.com/nikosEfthias/paypal"
 [dependencies]

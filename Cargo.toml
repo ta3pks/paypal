@@ -1,0 +1,7 @@
+[package]
+name = "paypal"
+version = "0.1.0"
+authors = ["nikos <nikos@mugsoft.io>"]
+edition = "2018"
+
+[dependencies]

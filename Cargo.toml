@@ -7,3 +7,8 @@ description = "A library to communicate with paypal api"
 license = "MIT"
 repository = "https://github.com/nikosEfthias/paypal"
 [dependencies]
+reqwest = "0.9.5"
+serde = "1.0.83"
+serde_derive = "1.0.83"
+serde_json = "1.0.33"
+base64 = "0.10.0"

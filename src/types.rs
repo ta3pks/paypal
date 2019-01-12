@@ -21,6 +21,31 @@ pub struct RequestNewPayment
     pub redirect_urls: RedirectUrls,
 } //}}}
 #[derive(Serialize, Deserialize, Debug)]
+pub struct ResponseNewPayment {
+    pub id:String,
+    pub intent:PaymentIntent,
+    pub payer:Payer,
+    pub state:State,
+    pub failure_reason:Failure_reason,
+    pub create_time:String,
+    pub update_time:String,
+}
+#[derive(Serialize, Deserialize, Debug)]
+pub enum State {
+    created,
+    approved,
+    failed
+}
+#[derive(Serialize, Deserialize, Debug)]
+pub enum Failure_reason {
+    UNABLE_TO_COMPLETE_TRANSACTION,
+    INVALID_PAYMENT_METHOD,
+    PAYER_CANNOT_PAY,
+    CANNOT_PAY_THIS_PAYEE,
+    REDIRECT_REQUIRED,
+    PAYEE_FILTER_RESTRICTIONS
+}
+#[derive(Serialize, Deserialize, Debug)]
 pub struct RedirectUrls
 {
     pub return_url: String,

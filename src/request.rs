@@ -6,6 +6,7 @@ use reqwest::{
 use std::collections::HashMap;
 use std::error::Error;
 use std::str::FromStr;
+pub type Resp = Result<ResponseData,String>;
 #[derive(Debug)]
 pub struct ResponseData
 {
@@ -29,14 +30,14 @@ pub fn post(
     url: &str,
     headers: &HashMap<String, String>,
     form: &HashMap<String, String>,
-) -> Result<ResponseData, String>
+) -> Resp
 {
     let client = Client::new();
     let client = client.post(url);
     let resp = client.headers(*_build_headers(headers)).form(form).send();
     _build_response(resp)
 }
-pub fn get(url: &str, headers: &HashMap<String, String>) -> Result<ResponseData, String>
+pub fn get(url: &str, headers: &HashMap<String, String>) -> Resp
 {
     let client = Client::new();
     let client = client.get(url);
@@ -48,7 +49,7 @@ pub fn post_json<T>(
     url: &str,
     headers: &mut HashMap<String, String>,
     form: &T,
-) -> Result<ResponseData, String>
+) -> Resp
 where
     T: serde::Serialize + ?Sized,
 {
@@ -70,7 +71,7 @@ fn _build_headers<'a>(map: &'a HashMap<String, String>) -> Box<HeaderMap> //{{{
     });
     header_map
 } //}}}
-fn _build_response(r: reqwest::Result<Response>) -> Result<ResponseData, String> //{{{
+fn _build_response(r: reqwest::Result<Response>) -> Resp //{{{
 {
     if let Ok(mut r) = r
     {

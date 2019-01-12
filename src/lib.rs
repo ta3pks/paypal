@@ -1,8 +1,10 @@
-mod token;
-mod types;
 mod request;
+mod token;
+pub mod types;
+pub mod payment;
 extern crate serde;
-#[macro_use] extern crate serde_derive;
+#[macro_use]
+extern crate serde_derive;
 extern crate serde_json;
 pub use self::token::get_token;
 const _ADDR: &str = "https://api.sandbox.paypal.com/v1";

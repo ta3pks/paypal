@@ -44,6 +44,8 @@ pub fn new(
         },
         payer: Payer {
             payment_method: method,
+            funding_instruments: None,
+            status: None,
         },
         intent,
         transactions,

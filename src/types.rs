@@ -2,7 +2,7 @@ use chrono as chr;
 use serde::{Deserialize, Serialize};
 
 // paypals reply when requesting a new jwt
-#[derive(Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug)]
 pub struct ResponseAccessToken {
     scope: String,
     pub nonce: String,
@@ -21,7 +21,7 @@ pub struct RequestNewPayment {
 }
 
 /// A single payment in PayPal's system, either completed or not.
-#[derive(Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug)]
 pub struct Payment {
     /// The ID of the payment.
     pub id: String,
@@ -57,7 +57,7 @@ pub struct Payment {
 }
 
 /// Used to customize the payment flow page.
-#[derive(Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug)]
 pub struct ApplicationContext {
     /// A label that overrides the business name in the merchant's PayPal account on the PayPal
     /// checkout pages.
@@ -78,7 +78,7 @@ pub struct ApplicationContext {
 }
 
 /// The shipping preference.
-#[derive(Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug)]
 #[serde(rename_all = "SCREAMING_SNAKE_CASE")]
 pub enum ShippingPreference {
     /// Redacts the shipping address from the PayPal pages. Recommended for digital goods.
@@ -92,7 +92,7 @@ pub enum ShippingPreference {
 }
 
 /// A struct containing a url and some metadata.
-#[derive(Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug)]
 pub struct LinkDescription {
     /// The complete target URL. To make the related call, combine the method with this URI
     /// Template-formatted link. For pre-processing, include the `$`, `(`, and `)` characters. The
@@ -107,7 +107,7 @@ pub struct LinkDescription {
 }
 
 /// Returned when listing all payments in the system.
-#[derive(Deserialize)]
+#[derive(Serialize, Deserialize)]
 pub struct ListPaymentResponse {
     /// A vector of the payments
     pub payments: Vec<Payment>,
@@ -201,7 +201,7 @@ pub enum PaymentMethod {
 
 /// The status of a Payer
 #[allow(missing_docs)] // undocumented by PayPal
-#[derive(Serialize, Debug)]
+#[derive(Serialize, Deserialize, Debug)]
 #[serde(rename_all = "SCREAMING_SNAKE_CASE")]
 pub enum PayerStatus {
     Verified,
@@ -225,7 +225,7 @@ pub struct TransactionAmount {
 }
 
 /// Data about a credit card.
-#[derive(Deserialize)]
+#[derive(Serialize, Deserialize, Debug)]
 pub struct FundingInstrument {
     /// Full representation of a credit card
     pub credit_card: Option<CreditCard>,
@@ -234,7 +234,7 @@ pub struct FundingInstrument {
 }
 
 /// A credit card
-#[derive(Deserialize)]
+#[derive(Serialize, Deserialize, Debug)]
 pub struct CreditCard {
     /// The credit card number. Value is numeric characters only with no spaces or punctuation.
     /// Must conform to the modulo and length required by each credit card type. Redacted in
@@ -261,7 +261,7 @@ pub struct CreditCard {
 }
 
 /// Represents an address.
-#[derive(Deserialize)]
+#[derive(Serialize, Deserialize, Debug)]
 pub struct Address {
     /// The first line of the address. For example, number, street, and so on.
     pub line1: String,
@@ -288,7 +288,7 @@ pub struct Address {
 }
 
 /// The address normalization status. Returned only for payers from Brazil.
-#[derive(Deserialize)]
+#[derive(Serialize, Deserialize, Debug)]
 #[serde(rename_all = "SCREAMING_SNAKE_CASE")]
 pub enum NormalizationStatus {
     /// Unknown
@@ -302,7 +302,7 @@ pub enum NormalizationStatus {
 }
 
 /// A credit card in token representation.
-#[derive(Deserialize)]
+#[derive(Serialize, Deserialize, Debug)]
 pub struct CreditCardToken {
     /// The ID of credit card that is stored in the PayPal vault.
     pub credit_card_id: String,

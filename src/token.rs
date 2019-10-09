@@ -5,7 +5,7 @@ use base64::encode;
 /// This function uses your `client id` and `secret`, and creates a bearer token that
 /// you must use to get access to the paypal endpoints
 pub fn get_token(id: &str, secret: &str) -> Result<ResponseAccessToken, Error> {
-    let ep = crate::_make_endpoint("/oauth2/token");
+    let ep = crate::_make_endpoint("/v1/oauth2/token");
     let auth_header = prepare_auth_header(id, secret);
     let mut headers = std::collections::HashMap::<String, String>::new();
     headers.insert("Authorization".into(), auth_header);

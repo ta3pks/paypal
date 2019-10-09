@@ -34,7 +34,7 @@ pub fn new(
     intent: PaymentIntent,
     transactions: Vec<Transaction>,
 ) -> Resp<Payment> {
-    let ep = crate::_make_endpoint("/payments/payment");
+    let ep = crate::_make_endpoint("/v1/payments/payment");
     let mut headers = HashMap::new();
     headers.insert("Authorization".into(), format!("Bearer {}", bearer));
     let body = RequestNewPayment {
@@ -64,7 +64,7 @@ pub fn list(bearer: &str) -> Resp<ListPaymentResponse> {
     let mut headers = HashMap::new();
     headers.insert("Authorization".into(), format!("Bearer {}", bearer));
     crate::request::get(
-        crate::_make_endpoint("/payments/payment").as_str(),
+        crate::_make_endpoint("/v1/payments/payment").as_str(),
         &headers,
     )
 }
@@ -99,7 +99,7 @@ pub fn execute(bearer: &str, payment_id: &str, payer_id: &str) -> Resp<Payment> 
     headers.insert("Authorization".into(), format!("Bearer {}", bearer));
     body.insert("payer_id".into(), payer_id.into());
     crate::request::post_json(
-        &crate::_make_endpoint(&format!("/payments/payment/{}/execute", payment_id)).as_str(),
+        &crate::_make_endpoint(&format!("/v1/payments/payment/{}/execute", payment_id)).as_str(),
         &mut headers,
         &body,
     )

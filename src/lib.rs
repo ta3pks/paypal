@@ -28,19 +28,19 @@ mod token;
 
 mod types;
 
+pub use payment::*;
 pub use token::get_token;
 pub use types::{
     Address, ApplicationContext, CreditCard, CreditCardToken, FailureReason, FundingInstrument,
     LinkDescription, ListPaymentResponse, NormalizationStatus, Payer, PayerStatus, Payment,
     PaymentIntent, PaymentMethod, RedirectUrls, State, Transaction, TransactionAmount,
 };
-pub use payment::*;
 
 #[cfg(feature = "test-mode")]
-const _ADDR: &str = "https://api.sandbox.paypal.com/v1";
+const _ADDR: &str = "https://api.sandbox.paypal.com";
 
 #[cfg(not(feature = "test-mode"))]
-const _ADDR: &str = "https://api.paypal.com/v1";
+const _ADDR: &str = "https://api.paypal.com";
 
 fn _make_endpoint(ep: &str) -> String {
     format!("{}{}", _ADDR, ep)
